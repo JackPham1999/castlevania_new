@@ -1,5 +1,5 @@
 #include "Torch.h"
-
+#include"Simon.h"
 
 CTorch::CTorch() :CGameObject()
 {
@@ -30,12 +30,18 @@ void CTorch::Render()
 	else
 		ani = TORCH_ANI_EXIST;
 	animation_set->at(ani)->Render(x, y);
+	
 	RenderBoundingBox();
 }
 void CTorch::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	l = x;
-	t = y;
-	r = x + TORCH_BBOX_WIDTH;
-	b = y + TORCH_BBOX_HEIGHT;
+	if (CSimon::GetInstance()->GetState() == SIMON_STATE_ATTACKING)
+	{
+		l = x;
+		t = y;
+		r = x + TORCH_BBOX_WIDTH;
+		b = y + TORCH_BBOX_HEIGHT;
+	}
+	else
+		l = t = r = b = 0;
 }

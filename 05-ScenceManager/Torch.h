@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 #define TORCH_BBOX_WIDTH		20
-#define TORCH_BBOX_HEIGHT		35
+#define TORCH_BBOX_HEIGHT		100
 #define TORCH_STATE_EXIST		0
 #define TORCH_STATE_NOT_EXIST	1
 #define TORCH_ANI_EXIST			0

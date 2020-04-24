@@ -127,6 +127,7 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="BackGrounds.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Torch.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="BackGrounds.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Torch.h" />

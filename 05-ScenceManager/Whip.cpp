@@ -3,6 +3,7 @@
 #include "Simon.h"
 #include "PlayScence.h"
 #include "Torch.h"
+#include "Utils.h"
 CWhip* CWhip::__instance = NULL;
 //CSimon* simon;
 
@@ -35,15 +36,22 @@ void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			if (dynamic_cast<CTorch*>(coObjects->at(i)))
 			{
+				DebugOut(L"[DEBUG] = Hello world  ");
+
 				CTorch* torch = dynamic_cast<CTorch*>(coObjects->at(i));
 				float l, t, r, b, l1, t1, r1, b1;
-				GetBoundingBox(l, t, r, b);
-				torch->GetBoundingBox(l1, t1, r1, b1);
-				//if ((r >= l1 && t1 >= b && r1 <= r && b1 >= b))///theiu61 dieu kien
-				if(!((l>r1)||(b1>t)||(b>t1)||(l1>r)))
+				GetBoundingBox(l, t, r, b);///
+				/*DebugOut(L"\n[DEBUG]l = %f %f %f %f", l, t, r, b);*/
+				coObjects->at(i)->GetBoundingBox(l1, t1, r1, b1);
+				/*DebugOut(L"\n[DEBUG]l11111 = %f %f %f %f", l1, t1, r1, b1);*/
+				/*DebugOut(L"\n[DEBUG]l11111 = %f > %f; %f > %f;  %f > %f; %f > %f", l, r1, b1, t, b, t1, l1, r);*/
+				if(!((l>r1)||(b1<t)||(b<t1)||(l1>r)))
 				{
+					/*DebugOut(L"\n[DEBUG] = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ");*/
 					if (torch->GetState() != TORCH_STATE_NOT_EXIST)
-						torch->SetState(TORCH_STATE_NOT_EXIST);
+					{
+							torch->SetState(TORCH_STATE_NOT_EXIST);
+					}
 				}
 			}
 		}
@@ -124,13 +132,9 @@ void CWhip::Render()
 				y = y + 3.5;
 			}
 		}
-		//CSimon::GetInstance()->GetPosition(x, y);
-		/*if (animations.size() > 1)
-			animations[ani]->Render(x, y);*/
 		int alpha = 255;
-		//SetAnimationSet(7);
-		animation_set->at(ani)->Render(x, y, alpha);/////////animation_set==nul
-
-		RenderBoundingBox();
+		animation_set->at(ani)->Render(x, y, alpha);
+		if(animation_set->at(ani)->GetCurrentFrame()==2)
+			RenderBoundingBox();
 	}
 }

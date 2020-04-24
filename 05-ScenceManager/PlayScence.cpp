@@ -12,6 +12,8 @@
 
 using namespace std;
 
+CTorch* torch_test;
+
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 	CScene(id, filePath)
 {
@@ -147,7 +149,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	CGameObject *obj = NULL;
 	CGameObject* weapon = NULL;
 	CGameObject* item = NULL;
-	//CWhip* whip = CWhip::GetInstance();
 	bool change_weapon=false;
 	bool change_item = false;
 
@@ -173,7 +174,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		//change_weapon = true;
 		break;
 	case OBJECT_TYPE_BACKGROUNDS: obj = new CBackGrounds(); break;
-	case OBJECT_TYPE_TORCH: item = new CTorch(); change_item = true; break;
+	case OBJECT_TYPE_TORCH: obj = new CTorch(); break;
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -198,7 +199,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	//	wthings.push_back(weapon);
 	//	change_weapon = false;*/
 	//}
-	if (change_item == true)
+	/*if (change_item == true)
 	{
 		item->SetPosition(x, y);
 		item->SetAnimationSet(ani_set);
@@ -206,11 +207,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		change_item = false;
 	}
 	else
-	{
+	{*/
 		obj->SetPosition(x, y);
 		obj->SetAnimationSet(ani_set);
 		objects.push_back(obj);
-	}
+		
+	//}
 	
 }
 
@@ -273,15 +275,24 @@ void CPlayScene::Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 
-	for (size_t i = 0; i < ithings.size(); i++)
+	/*for (size_t i = 0; i < ithings.size(); i++)
 	{
 		coObjects.push_back(ithings[i]);
-	}
+	}*/
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
+		
 	}
+
+	/*float x, y;
+	objects[0]->GetPosition(x, y);
+	DebugOut(L"[INFO] xxxxxxxxx= %f , yyyyyyyyyyyyyyyy= %f\n", x, y);
+
+	objects[1]->GetPosition(x, y);
+	DebugOut(L"[INFO] xxxxxxxxx= %f , yyyyyyyyyyyyyyyy= %f\n", x, y);*/
+	//CWhip::GetInstance()->Update();
 
 	/*for (size_t i = 0; i < ithings.size(); i++)
 	{
@@ -319,8 +330,8 @@ void CPlayScene::Render()
 {
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
-	for (int i = 0; i < ithings.size(); i++)
-		ithings[i]->Render();
+	//for (int i = 0; i < ithings.size(); i++)
+	//	ithings[i]->Render();
 }
 
 /*
