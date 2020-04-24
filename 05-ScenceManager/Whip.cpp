@@ -33,14 +33,14 @@ void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		for (UINT i = 0; i < coObjects->size(); i++)
 		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
-			if (dynamic_cast<CTorch*>(e->obj))
+			if (dynamic_cast<CTorch*>(coObjects->at(i)))
 			{
 				CTorch* torch = dynamic_cast<CTorch*>(coObjects->at(i));
 				float l, t, r, b, l1, t1, r1, b1;
 				GetBoundingBox(l, t, r, b);
 				torch->GetBoundingBox(l1, t1, r1, b1);
-				if ((r >= l1 && t1 >= b && r1 >= r && b1 >= b))///theiu61 dieu kien
+				//if ((r >= l1 && t1 >= b && r1 <= r && b1 >= b))///theiu61 dieu kien
+				if(!((l>r1)||(b1>t)||(b>t1)||(l1>r)))
 				{
 					if (torch->GetState() != TORCH_STATE_NOT_EXIST)
 						torch->SetState(TORCH_STATE_NOT_EXIST);

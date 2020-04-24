@@ -273,7 +273,7 @@ void CPlayScene::Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 
-	for (size_t i = 1; i < ithings.size(); i++)
+	for (size_t i = 0; i < ithings.size(); i++)
 	{
 		coObjects.push_back(ithings[i]);
 	}
@@ -283,10 +283,10 @@ void CPlayScene::Update(DWORD dt)
 		objects[i]->Update(dt, &coObjects);
 	}
 
-	//for (size_t i = 0; i < ithings.size(); i++)
-	//{
-	//	ithings[i]->Update(dt, &coObjects);
-	//}
+	/*for (size_t i = 0; i < ithings.size(); i++)
+	{
+		ithings[i]->Update(dt, &coObjects);
+	}*/
 
 	/*for (size_t i = 1; i < wthings.size(); i++)
 	{
