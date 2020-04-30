@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Simon.h"
+#include "Utils.h"
 
 #define ITEM_STATE_NOT_EXSIST 0
 #define ITEM_STATE_EXSIST 1
@@ -22,7 +23,12 @@ public:
 	CItem(/*float x = 0.0f, float y = 0.0f,*/int id=0);
 	virtual void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
-	virtual void GetBoundingBox(float& l, float& t, float& r, float& b) { l = t = r = b = 0; };
+	virtual void GetBoundingBox(float& l, float& t, float& r, float& b) {
+		l = x;
+		t = y;
+		r = x + 100;
+		b = y + 100;
+	};
 	void SetId(int i) { id = i; }
 	/*virtual CItem* GetItem() { return item; }*/
 };

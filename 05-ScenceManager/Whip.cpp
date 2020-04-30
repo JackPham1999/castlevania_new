@@ -51,6 +51,7 @@ void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					if (torch->GetState() != TORCH_STATE_NOT_EXIST)
 					{
 						torch->SetState(TORCH_STATE_NOT_EXIST);
+						//delete torch;
 					}
 				}
 			}

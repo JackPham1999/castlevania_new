@@ -177,12 +177,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	//weapon->SetPosition(x, y);
 
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
-	//if (change_weapon == true)
-	//{
-	//	/*weapon->SetAnimationSet(ani_set);
-	//	wthings.push_back(weapon);
-	//	change_weapon = false;*/
-	//}
+	if (change_weapon == true)
+	{
+		weapon->SetAnimationSet(ani_set);
+		wthings.push_back(weapon);
+		change_weapon = false;
+	}
 	if (change_item == true)
 	{
 		item->SetPosition(x, y);

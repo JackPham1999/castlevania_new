@@ -67,15 +67,23 @@ void CGameObject::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT> *coObjects, 
 	vector<LPCOLLISIONEVENT> &coEvents)
 {
+	DebugOut(L"[DEBUG] *coObject= %d", *coObjects);
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-
+		DebugOut(L"[INFO] t nowwwwwwwwwww= %f \n", e->t);
 		if (e->t > 0 && e->t <= 1.0f)
+		{
+			DebugOut(L"[INFO] t= %f \n", e->t);
 			coEvents.push_back(e);
+		}
 		else
+		{
+			//DebugOut(L"[INFO] t deleteeeeeeee= %f \n", e->t);
 			delete e;
+		}
 	}
+	DebugOut(L"[DEBUG] coEvent= %d", coEvents.size());
 
 	std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
 }
