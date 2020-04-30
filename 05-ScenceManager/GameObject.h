@@ -59,6 +59,8 @@ public:
 	int state;
 
 	DWORD dt; 
+	
+	int _type;
 
 	LPANIMATION_SET animation_set;
 

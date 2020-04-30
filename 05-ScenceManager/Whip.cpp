@@ -50,7 +50,7 @@ void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					/*DebugOut(L"\n[DEBUG] = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ");*/
 					if (torch->GetState() != TORCH_STATE_NOT_EXIST)
 					{
-							torch->SetState(TORCH_STATE_NOT_EXIST);
+						torch->SetState(TORCH_STATE_NOT_EXIST);
 					}
 				}
 			}
@@ -61,9 +61,7 @@ void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 }
 
 void CWhip::GetBoundingBox(float& left, float& top, float& right, float& bottom)
-{/*
-	if (animation->GetCurrentFrame() < 2)
-		return;*/
+{
 	if (_level == 1 || _level == 2)
 	{
 		left = x;

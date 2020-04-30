@@ -1,9 +1,17 @@
 #include "Torch.h"
 #include"Simon.h"
 
-CTorch::CTorch() :CGameObject()
+CTorch::CTorch(float x, float y/*,int id*/) :CGameObject()
 {
-
+	SetState(TORCH_STATE_EXIST);
+	this->x = x;
+	this->y = y;
+	/*switch (id)
+	{
+	case ID_WHIPUPGRADE:
+		item = GetItem();
+		id = 0;
+	}*/
 }
 
 void CTorch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -13,15 +21,6 @@ void CTorch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 }
 
-//void CTorch::GetBoundingBox(float& left, float& top, float& right, float& bottom)
-//{
-//
-//	left = x - 10;
-//	right = x + 50;
-//	top = y - 10;
-//	bottom = y + 50;
-//}
-
 void CTorch::Render()
 {
 	int ani;
@@ -30,7 +29,7 @@ void CTorch::Render()
 	else
 		ani = TORCH_ANI_EXIST;
 	animation_set->at(ani)->Render(x, y);
-	
+	//animation_set->at(id)->Render(x, y);
 	RenderBoundingBox();
 }
 void CTorch::GetBoundingBox(float& l, float& t, float& r, float& b)

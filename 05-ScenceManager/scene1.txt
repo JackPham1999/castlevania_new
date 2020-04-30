@@ -113,7 +113,11 @@
 #TORCH
 50001	175	1	191	33	50
 50002	192	1	208	33	50
-50003	213	50	236	92	50
+50003	727	477	735	493	0
+50004	213	50	236	92	50
+
+# WHIP UPGRADE
+60001	1	1	17	17	50
 				
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -135,7 +139,7 @@
 599	10099	100
 
 # ==== BRICK =========
-601	20001	100
+600	20001	100
 
 # ==== GOOMBA  =========
 # walk
@@ -202,6 +206,11 @@
 #==== TORCH ========
 501	50001	100	50002	100
 502	50003	100
+503	50004	100
+
+# ==== WHIP UPGRADE =======
+601	60001	100
+
 
 # id	ani1	ani2	ani3
 #
@@ -209,7 +218,7 @@
 # MARIO
 1	400	401	402	403	404	405	599
 # BRICK 
-2	601
+2	600
 # GOOMBA
 3	7001	7002
 # SCENE 1
@@ -254,14 +263,16 @@
 7	701	702	703	704	705	706
 
 #TORCH
-5	501	502
+5	501	502	503
+
+#WHIP UPGRADE
+6	601
+
 
 [OBJECTS]
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba,
-#	100 = BackGrounds, 4 = Whip, 5 = Torch
-
-
+#	100 = BackGrounds, 4 = Whip, 5 = Torch , 6 = WHIP UPGRADE
 
 
 # --- SCENE 1 ---------
@@ -392,6 +403,9 @@
 5	340	113	5
 5	470	113	5
 5	600	113	5
+
+# WHIP UPGRADE
+6	100	100	6
 
 # MARIO
 0	50.0	0	1

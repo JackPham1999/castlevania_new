@@ -9,6 +9,7 @@
 #include "BackGrounds.h"
 #include "Whip.h"
 #include "Torch.h"
+#include"Item.h"
 
 using namespace std;
 
@@ -24,25 +25,6 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 	Load scene resources from scene file (textures, sprites, animations and objects)
 	See scene1.txt, scene2.txt for detail format specification
 */
-
-#define SCENE_SECTION_UNKNOWN -1
-#define SCENE_SECTION_TEXTURES 2
-#define SCENE_SECTION_SPRITES 3
-#define SCENE_SECTION_ANIMATIONS 4
-#define SCENE_SECTION_ANIMATION_SETS	5
-#define SCENE_SECTION_OBJECTS	6
-
-#define OBJECT_TYPE_SIMON	0
-#define OBJECT_TYPE_BRICK	1
-#define OBJECT_TYPE_GOOMBA	2
-#define OBJECT_TYPE_KOOPAS	3
-#define OBJECT_TYPE_WHIP	4
-#define OBJECT_TYPE_TORCH	5
-
-#define OBJECT_TYPE_PORTAL	50
-#define OBJECT_TYPE_BACKGROUNDS	100
-
-#define MAX_SCENE_LINE 1024
 
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
@@ -175,6 +157,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_BACKGROUNDS: obj = new CBackGrounds(); break;
 	case OBJECT_TYPE_TORCH: obj = new CTorch(); break;
+	case OBJECT_TYPE_WHIPUPGRADE:item = new CItem(0);
+		change_item = true; break;
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -199,7 +183,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	//	wthings.push_back(weapon);
 	//	change_weapon = false;*/
 	//}
-	/*if (change_item == true)
+	if (change_item == true)
 	{
 		item->SetPosition(x, y);
 		item->SetAnimationSet(ani_set);
@@ -207,12 +191,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		change_item = false;
 	}
 	else
-	{*/
+	{
 		obj->SetPosition(x, y);
 		obj->SetAnimationSet(ani_set);
 		objects.push_back(obj);
-		
-	//}
+	}
 	
 }
 
@@ -275,11 +258,7 @@ void CPlayScene::Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 
-	/*for (size_t i = 0; i < ithings.size(); i++)
-	{
-		coObjects.push_back(ithings[i]);
-	}*/
-
+	
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
@@ -293,11 +272,15 @@ void CPlayScene::Update(DWORD dt)
 	objects[1]->GetPosition(x, y);
 	DebugOut(L"[INFO] xxxxxxxxx= %f , yyyyyyyyyyyyyyyy= %f\n", x, y);*/
 	//CWhip::GetInstance()->Update();
+	for (size_t i = 0; i < ithings.size(); i++)
+	{
+		coObjects.push_back(ithings[i]);
+	}
 
-	/*for (size_t i = 0; i < ithings.size(); i++)
+	for (size_t i = 0; i < ithings.size(); i++)
 	{
 		ithings[i]->Update(dt, &coObjects);
-	}*/
+	}
 
 	/*for (size_t i = 1; i < wthings.size(); i++)
 	{
@@ -330,8 +313,8 @@ void CPlayScene::Render()
 {
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
-	//for (int i = 0; i < ithings.size(); i++)
-	//	ithings[i]->Render();
+	for (int i = 0; i < ithings.size(); i++)
+		ithings[i]->Render();
 }
 
 /*
