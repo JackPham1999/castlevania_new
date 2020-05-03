@@ -157,8 +157,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_BACKGROUNDS: obj = new CBackGrounds(); break;
 	case OBJECT_TYPE_TORCH: obj = new CTorch(); break;
-	case OBJECT_TYPE_WHIPUPGRADE:item = new CItem(0);
-		change_item = true; break;
+	case OBJECT_TYPE_WHIPUPGRADE:obj = new CItem(0); 
+		break;
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -177,7 +177,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	//weapon->SetPosition(x, y);
 
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
-	if (change_weapon == true)
+	/*if (change_weapon == true)
 	{
 		weapon->SetAnimationSet(ani_set);
 		wthings.push_back(weapon);
@@ -191,11 +191,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		change_item = false;
 	}
 	else
-	{
+	{*/
 		obj->SetPosition(x, y);
 		obj->SetAnimationSet(ani_set);
 		objects.push_back(obj);
-	}
+	//}
 	
 }
 
@@ -259,20 +259,23 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	
-	for (size_t i = 0; i < objects.size(); i++)
+	for (size_t i = 1; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
 		
 	}
 
+	//objects[0]->Update(dt, &coObjects);
+	
 	/*float x, y;
 	objects[0]->GetPosition(x, y);
+	o
 	DebugOut(L"[INFO] xxxxxxxxx= %f , yyyyyyyyyyyyyyyy= %f\n", x, y);
 
 	objects[1]->GetPosition(x, y);
 	DebugOut(L"[INFO] xxxxxxxxx= %f , yyyyyyyyyyyyyyyy= %f\n", x, y);*/
 	//CWhip::GetInstance()->Update();
-	for (size_t i = 0; i < ithings.size(); i++)
+	/*for (size_t i = 0; i < ithings.size(); i++)
 	{
 		coObjects.push_back(ithings[i]);
 	}
@@ -280,7 +283,7 @@ void CPlayScene::Update(DWORD dt)
 	for (size_t i = 0; i < ithings.size(); i++)
 	{
 		ithings[i]->Update(dt, &coObjects);
-	}
+	}*/
 
 	/*for (size_t i = 1; i < wthings.size(); i++)
 	{
@@ -313,8 +316,9 @@ void CPlayScene::Render()
 {
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
-	for (int i = 0; i < ithings.size(); i++)
-		ithings[i]->Render();
+	//objects[0]->Render();
+	/*for (int i = 0; i < ithings.size(); i++)
+		ithings[i]->Render();*/
 }
 
 /*
@@ -360,6 +364,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		simon->SetState(SIMON_STATE_WALKING_RIGHT);
 	else if (game->IsKeyDown(DIK_LEFT))
 		simon->SetState(SIMON_STATE_WALKING_LEFT);
+	else if (game->IsKeyDown(DIK_DOWN))
+		simon->SetState(SIMON_STATE_SITTING);
 	else if (game->IsKeyDown(DIK_Z))
 		simon->SetState(SIMON_STATE_ATTACKING);
 	else

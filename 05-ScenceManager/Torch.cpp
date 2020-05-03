@@ -25,7 +25,9 @@ void CTorch::Render()
 {
 	int ani;
 	if (state == TORCH_STATE_NOT_EXIST)
+	{
 		ani = TORCH_ANI_NOT_EXIST;
+	}
 	else
 		ani = TORCH_ANI_EXIST;
 	animation_set->at(ani)->Render(x, y);

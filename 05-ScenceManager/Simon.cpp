@@ -47,6 +47,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// turn off collision when die 
 	if (state!=SIMON_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
+	///DebugOut(L"\n[DEBUG] coEvent simon == %d", coEvents.size()); 
 
 	// reset untouchable timer if untouchable time has passed
 	if ( GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME) 
@@ -141,8 +142,16 @@ void CSimon::Render()
 	{
 		if (vx == 0)
 		{
-			if (nx>0) ani = SIMON_ANI_BIG_IDLE_RIGHT;
-			else ani = SIMON_ANI_BIG_IDLE_LEFT;
+			if (state == SIMON_STATE_IDLE)
+			{
+				if (nx > 0) ani = SIMON_ANI_BIG_IDLE_RIGHT;
+				else ani = SIMON_ANI_BIG_IDLE_LEFT;
+			}
+			else if (state == SIMON_STATE_SITTING)
+			{
+				if (nx > 0) ani = SIMON_ANI_SITTING_RIGHT;
+				else ani = SIMON_ANI_SITTING_LEFT;
+			}
 		}
 		else if (vx > 0) 
 			ani = SIMON_ANI_WALKING_RIGHT; 
@@ -204,6 +213,7 @@ void CSimon::SetState(int state)
 	case SIMON_STATE_IDLE: 
 		vx = 0;
 		break;
+	case SIMON_STATE_SITTING:vx = 0; break;
 	case SIMON_STATE_DIE:
 		vy = -SIMON_DIE_DEFLECT_SPEED;
 		break;
@@ -221,14 +231,23 @@ void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom
 
 	if (level==SIMON_LEVEL_BIG)
 	{
-		right = x + SIMON_BIG_BBOX_WIDTH;
-		bottom = y + SIMON_BIG_BBOX_HEIGHT;
+		/*if (state == SIMON_STATE_SITTING)
+		{
+			right = x + SIMON_BIG_BBOX_WIDTH;
+			bottom = y + SIMON_BIG_BBOX_HEIGHT-10;
+			SetPosition(x, 120);
+		}*/
+		//if (state == SIMON_STATE_IDLE)
+		//{
+			right = x + SIMON_BIG_BBOX_WIDTH;
+			bottom = y + SIMON_BIG_BBOX_HEIGHT;
+		//}
 	}
-	else
+	/*else
 	{
 		right = x + SIMON_SMALL_BBOX_WIDTH;
 		bottom = y + SIMON_SMALL_BBOX_HEIGHT;
-	}
+	}*/
 }
 
 /*

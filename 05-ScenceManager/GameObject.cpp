@@ -45,7 +45,6 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	float rdy = this->dy - sdy;
 
 	GetBoundingBox(ml, mt, mr, mb);
-
 	CGame::SweptAABB(
 		ml, mt, mr, mb,
 		rdx, rdy,
@@ -67,14 +66,14 @@ void CGameObject::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT> *coObjects, 
 	vector<LPCOLLISIONEVENT> &coEvents)
 {
-	DebugOut(L"[DEBUG] *coObject= %d", *coObjects);
+	//DebugOut(L"[DEBUG] *coObject_size= %d", coObjects->size());
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-		DebugOut(L"[INFO] t nowwwwwwwwwww= %f \n", e->t);
+		//DebugOut(L"[INFO] t before = %f \n", e->t);
 		if (e->t > 0 && e->t <= 1.0f)
 		{
-			DebugOut(L"[INFO] t= %f \n", e->t);
+			//DebugOut(L"[INFO] t inside if = %f \n", e->t);
 			coEvents.push_back(e);
 		}
 		else
@@ -83,7 +82,7 @@ void CGameObject::CalcPotentialCollisions(
 			delete e;
 		}
 	}
-	DebugOut(L"[DEBUG] coEvent= %d", coEvents.size());
+	/*DebugOut(L"[DEBUG] coEvent= %d", coEvents.size());*/
 
 	std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
 }

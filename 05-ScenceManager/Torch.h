@@ -16,12 +16,16 @@ class CTorch : public CGameObject
 protected:
 	DWORD dt_die;
 	int id;
-	/*CItem* item;*/
+	CItem* item=new CItem(Random(0,5));
 public:
 	CTorch(float x = 0.0f, float y = 0.0f/*,int id=0*/);
 	virtual void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
-	/*virtual CItem* GetItem() { return item; }
-	CItem* SetItem(CItem* i) { item = i; return item; }*/
+	CItem* GetItem() { return item; }
+	CItem* SetItem(CItem* i) { item = i; return item; }
+	int Random(int maxN,int minN) {
+		int r = minN + rand() % (maxN + 1 - minN);
+		return r;
+	};
 };

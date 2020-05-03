@@ -6,7 +6,7 @@
 #define ITEM_STATE_NOT_EXSIST 0
 #define ITEM_STATE_EXSIST 1
 
-#define ITEM_GRAVITY	 0.02f
+#define ITEM_GRAVITY	 0.00002f
 #define TIME_ITEM_EXSIST 5000
 
 #define ITEM_BBOX_WIDTH	20
@@ -19,6 +19,7 @@ protected:
 	int id;
 	/*CItem* item;*/
 	DWORD time_exsist;
+	vector<CItem> listItem;
 public:
 	CItem(/*float x = 0.0f, float y = 0.0f,*/int id=0);
 	virtual void Render();
@@ -26,8 +27,8 @@ public:
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b) {
 		l = x;
 		t = y;
-		r = x + 100;
-		b = y + 100;
+		r = x + 16;
+		b = y + 16;
 	};
 	void SetId(int i) { id = i; }
 	/*virtual CItem* GetItem() { return item; }*/
