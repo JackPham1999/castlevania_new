@@ -130,7 +130,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	CGameObject *obj = NULL;
 	CGameObject* weapon = NULL;
-	CGameObject* item = NULL;
+	//CGameObject* item = NULL;
+	CItem* item = NULL;
 	bool change_weapon=false;
 	bool change_item = false;
 
@@ -157,7 +158,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_BACKGROUNDS: obj = new CBackGrounds(); break;
 	case OBJECT_TYPE_TORCH: obj = new CTorch(); break;
-	case OBJECT_TYPE_WHIPUPGRADE:obj = new CItem(0); 
+	//case OBJECT_TYPE_ITEM:obj = new CItem();
 		break;
 	case OBJECT_TYPE_PORTAL:
 		{	
