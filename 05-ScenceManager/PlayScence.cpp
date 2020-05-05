@@ -157,7 +157,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		//change_weapon = true;
 		break;
 	case OBJECT_TYPE_BACKGROUNDS: obj = new CBackGrounds(); break;
-	case OBJECT_TYPE_TORCH: obj = new CTorch(); break;
+	case OBJECT_TYPE_TORCH: 
+		obj = new CTorch();
+		CTorch::SetInstance(obj);
+		item = CTorch::GetInstance()->GetItem();
+		change_item = true;
+		break;
 	//case OBJECT_TYPE_ITEM:obj = new CItem();
 		break;
 	case OBJECT_TYPE_PORTAL:
@@ -193,9 +198,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 	else
 	{*/
-		obj->SetPosition(x, y);
-		obj->SetAnimationSet(ani_set);
-		objects.push_back(obj);
+	obj->SetPosition(x, y);
+	obj->SetAnimationSet(ani_set);
+	objects.push_back(obj);
+	if (change_item == true)
+	{
+		objects.push_back(item);
+		change_item = false;
+	}
 	//}
 	
 }

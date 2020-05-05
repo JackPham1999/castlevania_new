@@ -9,6 +9,7 @@
 #include "Portal.h"
 #include"PlayScence.h"
 #include "Whip.h"
+#include "Item.h"
 
 CSimon* CSimon::__instance = NULL;
 
@@ -125,6 +126,33 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				CPortal *p = dynamic_cast<CPortal *>(e->obj);
 				CGame::GetInstance()->SwitchScene(p->GetSceneId());
 			}
+
+			for (UINT i = 0; i < coObjects->size(); i++)
+			{
+				if (dynamic_cast<CItem*>(coObjects->at(i)))
+				{
+					//DebugOut(L"[DEBUG] = Hello world  ");
+
+					CItem* item = dynamic_cast<CItem*>(coObjects->at(i));
+					float l, t, r, b, l1, t1, r1, b1;
+					GetBoundingBox(l, t, r, b);///
+					/*DebugOut(L"\n[DEBUG]l = %f %f %f %f", l, t, r, b);*/
+					coObjects->at(i)->GetBoundingBox(l1, t1, r1, b1);
+					/*DebugOut(L"\n[DEBUG]l11111 = %f %f %f %f", l1, t1, r1, b1);*/
+					/*DebugOut(L"\n[DEBUG]l11111 = %f > %f; %f > %f;  %f > %f; %f > %f", l, r1, b1, t, b, t1, l1, r);*/
+					if (!((l > r1) || (b1 < t) || (b < t1) || (l1 > r)))
+					{
+						/*DebugOut(L"\n[DEBUG] = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ");*/
+						if (item->GetState() != ITEM_STATE_NOT_EXIST)
+						{
+							item->SetState(ITEM_STATE_NOT_EXIST);
+							//delete torch;
+						}
+					}
+				}
+			}
+			// clean up collision events
+			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 		}
 	}
 

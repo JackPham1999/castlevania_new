@@ -1,6 +1,21 @@
 ﻿#include "Torch.h"
 #include"Simon.h"
 
+CTorch* CTorch::__instance = NULL;
+//CSimon* simon;
+
+CTorch* CTorch::GetInstance()
+{
+	if (__instance == NULL) __instance = new CTorch();
+	return __instance;
+}
+CTorch* CTorch::SetInstance(CGameObject* obj)
+{
+	__instance = (CTorch*)obj;
+	return __instance;
+}
+
+
 CTorch::CTorch(float x, float y/*,int id*/) :CGameObject()
 {
 	SetState(TORCH_STATE_EXIST);
@@ -44,7 +59,7 @@ void CTorch::Render()
 	{
 	////////////////////////////////////// thành công
 		//DebugOut(L"\n[DEBUG] into the render item");
-		item->SetState(ITEM_STATE_EXSIST);
+		item->SetState(ITEM_STATE_EXIST);
 		//item->SetPosition(100, 100);
 		item->Render();
 	}

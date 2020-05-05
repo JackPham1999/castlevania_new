@@ -8,7 +8,7 @@ CItem::CItem(float x, float y,int id) :CGameObject()
 	this->y = y;
 	this->id = id;
 	time_exsist = 0;
-	state = ITEM_STATE_NOT_EXSIST;
+	state = ITEM_STATE_NOT_EXIST;
 	/*switch (id)
 	{
 	case ID_WHIPUPGRADE:
@@ -21,7 +21,7 @@ void CItem::Render()
 	CAnimationSets* animation_sets = CAnimationSets::GetInstance();
 	LPANIMATION_SET ani_set = animation_sets->Get(6);
 	SetAnimationSet(ani_set);
-	if (state == ITEM_STATE_EXSIST)
+	if (state == ITEM_STATE_EXIST)
 	{
 		//SetPosition(150, 100);
 		if (animation_set->size() > 0)/////animation_set=null

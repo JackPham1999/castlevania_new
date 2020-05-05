@@ -13,6 +13,7 @@
 
 class CTorch : public CGameObject
 {
+	static CTorch* __instance;
 protected:
 	DWORD dt_die;
 	int id;
@@ -31,4 +32,6 @@ public:
 		return r;
 	};
 	float GetX() { return x; }
+	static CTorch* GetInstance();
+	static CTorch* SetInstance(CGameObject* obj);
 };

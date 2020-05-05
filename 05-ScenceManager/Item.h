@@ -3,11 +3,11 @@
 #include "Simon.h"
 #include "Utils.h"
 
-#define ITEM_STATE_NOT_EXSIST 0
-#define ITEM_STATE_EXSIST 1
+#define ITEM_STATE_NOT_EXIST 0
+#define ITEM_STATE_EXIST 1
 
 #define ITEM_GRAVITY	 0.0002f
-#define TIME_ITEM_EXSIST 5000
+#define TIME_ITEM_EXIST 5000
 
 #define ITEM_BBOX_WIDTH	20
 #define ITEM_BBOX_HEIGHT	100
